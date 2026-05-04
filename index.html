@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Ярослав Міхєєв — створюю сучасні сайти під ключ: лендінги, корпоративні сайти, інтернет-магазини. Швидко, красиво, з турботою про результат." />
+<title>Ярослав Міхєєв — сайти, що продають</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0f;
+    --bg-2:#11111a;
+    --card:#151522;
+    --border:rgba(255,255,255,0.08);
+    --text:#e8e8f0;
+    --muted:#8a8a9a;
+    --accent:#7c5cff;
+    --accent-2:#22d3ee;
+    --accent-3:#ff7ac6;
+    --gradient:linear-gradient(135deg,#7c5cff 0%,#22d3ee 50%,#ff7ac6 100%);
+    --shadow:0 20px 60px rgba(124,92,255,0.15);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Manrope',system-ui,-apple-system,sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* Small black outline on all text */
+  body, body *{
+    text-shadow:
+      -1px -1px 0 #000,
+       1px -1px 0 #000,
+      -1px  1px 0 #000,
+       1px  1px 0 #000,
+       0    0   2px rgba(0,0,0,0.6);
+  }
+  /* Animated background orbs */
+  .bg-orbs{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+  .orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:0.35;animation:float 20s ease-in-out infinite}
+  .orb-1{width:500px;height:500px;background:#7c5cff;top:-100px;left:-100px}
+  .orb-2{width:400px;height:400px;background:#22d3ee;top:40%;right:-100px;animation-delay:-7s}
+  .orb-3{width:450px;height:450px;background:#ff7ac6;bottom:-100px;left:30%;animation-delay:-14s}
+  @keyframes float{
+    0%,100%{transform:translate(0,0) scale(1)}
+    33%{transform:translate(40px,-60px) scale(1.1)}
+    66%{transform:translate(-30px,40px) scale(0.95)}
+  }
+  /* Animated moving lines */
+  .bg-lines{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+  .line{
+    position:absolute;height:1px;width:200%;
+    background:linear-gradient(90deg,transparent,rgba(124,92,255,0) 20%,rgba(124,92,255,0.55) 50%,rgba(34,211,238,0) 80%,transparent);
+    animation:slide 12s linear infinite;
+    opacity:0.7;
+  }
+  .line.v{
+    height:200%;width:1px;
+    background:linear-gradient(180deg,transparent,rgba(34,211,238,0) 20%,rgba(34,211,238,0.5) 50%,rgba(255,122,198,0) 80%,transparent);
+    animation:slideV 14s linear infinite;
+  }
+  .line-1{top:15%;animation-delay:0s}
+  .line-2{top:38%;animation-delay:-3s;animation-duration:16s;background:linear-gradient(90deg,transparent,rgba(34,211,238,0) 20%,rgba(34,211,238,0.5) 50%,rgba(255,122,198,0) 80%,transparent)}
+  .line-3{top:62%;animation-delay:-6s;animation-duration:18s;background:linear-gradient(90deg,transparent,rgba(255,122,198,0) 20%,rgba(255,122,198,0.5) 50%,rgba(124,92,255,0) 80%,transparent)}
+  .line-4{top:82%;animation-delay:-9s;animation-duration:14s}
+  .line-5{left:20%;animation-delay:-2s}
+  .line-6{left:55%;animation-delay:-8s;animation-duration:17s;background:linear-gradient(180deg,transparent,rgba(124,92,255,0) 20%,rgba(124,92,255,0.45) 50%,rgba(255,122,198,0) 80%,transparent)}
+  .line-7{left:82%;animation-delay:-5s;animation-duration:15s;background:linear-gradient(180deg,transparent,rgba(255,122,198,0) 20%,rgba(255,122,198,0.45) 50%,rgba(34,211,238,0) 80%,transparent)}
+  @keyframes slide{
+    0%{transform:translateX(-50%)}
+    100%{transform:translateX(0%)}
+  }
+  @keyframes slideV{
+    0%{transform:translateY(-50%)}
+    100%{transform:translateY(0%)}
+  }
+  /* Noise overlay */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:0.04;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .container{max-width:1200px;margin:0 auto;padding:0 24px}
+  /* Header */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:16px 0;backdrop-filter:blur(12px);
+    background:rgba(10,10,15,0.7);border-bottom:1px solid var(--border);
+    transition:all .3s ease;
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between}
+  .logo{font-weight:800;font-size:1.15rem;letter-spacing:-0.02em;display:flex;align-items:center;gap:10px}
+  .logo-dot{width:10px;height:10px;border-radius:50%;background:var(--gradient);box-shadow:0 0 20px var(--accent)}
+  .nav-links{display:flex;gap:32px;list-style:none}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:0.92rem;font-weight:500;transition:color .2s}
+  .nav-links a:hover{color:var(--text)}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 22px;border-radius:12px;font-weight:600;font-size:0.92rem;
+    text-decoration:none;cursor:pointer;border:none;font-family:inherit;
+    transition:transform .2s ease,box-shadow .2s ease;
+  }
+  .btn-primary{background:var(--gradient);color:#fff;box-shadow:var(--shadow)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 25px 70px rgba(124,92,255,0.35)}
+  .btn-ghost{background:rgba(255,255,255,0.04);color:var(--text);border:1px solid var(--border)}
+  .btn-ghost:hover{background:rgba(255,255,255,0.08)}
+  .btn-outline{
+    position:relative;background:transparent;color:var(--text);
+    border:2px solid transparent;
+    background-image:linear-gradient(var(--bg),var(--bg)),var(--gradient);
+    background-origin:border-box;background-clip:padding-box,border-box;
+    transition:transform .2s ease,box-shadow .2s ease,color .2s ease;
+  }
+  .btn-outline:hover{
+    transform:translateY(-2px);
+    box-shadow:0 20px 50px rgba(124,92,255,0.25);
+    background-image:linear-gradient(rgba(124,92,255,0.12),rgba(34,211,238,0.12)),var(--gradient);
+  }
+  @media(max-width:720px){.nav-links{display:none}}
+  /* Hero */
+  .hero{padding:160px 0 100px;position:relative}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:6px 14px;border-radius:999px;
+    background:rgba(124,92,255,0.1);border:1px solid rgba(124,92,255,0.25);
+    font-size:0.82rem;color:#b8a8ff;font-weight:500;
+    margin-bottom:24px;
+  }
+  .pulse{width:8px;height:8px;border-radius:50%;background:#22d3ee;box-shadow:0 0 0 0 rgba(34,211,238,0.7);animation:pulse 2s infinite}
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(34,211,238,0.7)}
+    70%{box-shadow:0 0 0 12px rgba(34,211,238,0)}
+    100%{box-shadow:0 0 0 0 rgba(34,211,238,0)}
+  }
+  h1{
+    font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.05;letter-spacing:-0.035em;
+    font-weight:800;margin-bottom:24px;max-width:900px;
+  }
+  .gradient-text{
+    background:var(--gradient);-webkit-background-clip:text;background-clip:text;
+    color:transparent;display:inline-block;
+  }
+  .hero p.lead{font-size:clamp(1.05rem,1.6vw,1.25rem);color:var(--muted);max-width:620px;margin-bottom:36px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:60px}
+  .hero-cta .btn{padding:20px 44px;font-size:1.2rem;border-radius:16px}
+  @media(max-width:720px){.hero-cta .btn{padding:18px 32px;font-size:1.05rem}}
+  /* Stats */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;padding-top:40px;border-top:1px solid var(--border)}
+  .stat-num{font-size:2.4rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:4px}
+  .stat-label{color:var(--muted);font-size:0.88rem}
+  /* Sections */
+  section{padding:100px 0;position:relative}
+  .section-header{text-align:center;margin-bottom:64px;max-width:640px;margin-left:auto;margin-right:auto}
+  .section-eyebrow{
+    color:var(--accent);font-size:0.85rem;font-weight:600;letter-spacing:0.15em;
+    text-transform:uppercase;margin-bottom:12px;
+  }
+  h2{font-size:clamp(2rem,4vw,2.8rem);letter-spacing:-0.03em;font-weight:700;margin-bottom:16px;line-height:1.15}
+  .section-header p{color:var(--muted);font-size:1.05rem}
+  /* Services */
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+  .service-card{
+    background:var(--card);border:1px solid var(--border);border-radius:20px;
+    padding:32px;position:relative;overflow:hidden;
+    transition:transform .3s ease,border-color .3s ease;
+  }
+  .service-card::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at var(--x,50%) var(--y,50%),rgba(124,92,255,0.12),transparent 40%);
+    opacity:0;transition:opacity .3s;pointer-events:none;
+  }
+  .service-card:hover{transform:translateY(-4px);border-color:rgba(124,92,255,0.3)}
+  .service-card:hover::before{opacity:1}
+  .service-icon{
+    width:48px;height:48px;border-radius:12px;
+    background:linear-gradient(135deg,rgba(124,92,255,0.2),rgba(34,211,238,0.15));
+    display:flex;align-items:center;justify-content:center;margin-bottom:20px;
+    font-size:1.5rem;
+  }
+  .service-card h3{font-size:1.25rem;margin-bottom:10px;font-weight:700}
+  .service-card p{color:var(--muted);font-size:0.95rem}
+  /* Portfolio */
+  .portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+  .project{
+    background:var(--card);border:1px solid var(--border);border-radius:20px;
+    overflow:hidden;transition:transform .3s ease;
+  }
+  .project:hover{transform:translateY(-6px)}
+  .project-preview{
+    aspect-ratio:16/10;position:relative;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .p1{background:linear-gradient(135deg,#1a1a2e,#16213e)}
+  .p2{background:linear-gradient(135deg,#2d1b4e,#0f3460)}
+  .p3{background:linear-gradient(135deg,#1e3a5f,#0f4c5c)}
+  .project-preview::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 30% 20%,rgba(124,92,255,0.25),transparent 50%);
+  }
+  .mock-browser{
+    width:82%;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.08);
+    border-radius:10px;padding:10px;backdrop-filter:blur(10px);z-index:1;position:relative;
+  }
+  .mock-dots{display:flex;gap:5px;margin-bottom:10px}
+  .mock-dots span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.25)}
+  .mock-content{height:90px;border-radius:6px;background:linear-gradient(135deg,rgba(124,92,255,0.3),rgba(34,211,238,0.25));position:relative;overflow:hidden}
+  .mock-content::before{content:"";position:absolute;top:12px;left:12px;width:40%;height:8px;background:rgba(255,255,255,0.5);border-radius:4px}
+  .mock-content::after{content:"";position:absolute;top:28px;left:12px;width:60%;height:6px;background:rgba(255,255,255,0.25);border-radius:3px}
+  .project-info{padding:22px}
+  .project-info h3{font-size:1.15rem;margin-bottom:6px;font-weight:700}
+  .project-info p{color:var(--muted);font-size:0.9rem;margin-bottom:12px}
+  .tags{display:flex;gap:8px;flex-wrap:wrap}
+  .tag{font-size:0.75rem;padding:4px 10px;border-radius:6px;background:rgba(124,92,255,0.12);color:#b8a8ff;font-weight:500}
+  /* Pricing */
+  .tabs{display:flex;justify-content:center;gap:8px;margin-bottom:40px;flex-wrap:wrap}
+  .tab{
+    padding:10px 20px;border-radius:10px;background:rgba(255,255,255,0.04);
+    border:1px solid var(--border);color:var(--muted);cursor:pointer;
+    font-family:inherit;font-size:0.92rem;font-weight:500;transition:all .2s;
+  }
+  .tab.active{background:var(--gradient);color:#fff;border-color:transparent}
+  .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+  .price-card{
+    background:var(--card);border:1px solid var(--border);border-radius:20px;
+    padding:36px 28px;position:relative;
+  }
+  .price-card.featured{border-color:rgba(124,92,255,0.4);background:linear-gradient(180deg,rgba(124,92,255,0.08),var(--card))}
+  .featured-badge{
+    position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+    background:var(--gradient);color:#fff;padding:4px 14px;border-radius:999px;
+    font-size:0.75rem;font-weight:600;letter-spacing:0.05em;
+  }
+  .price-card h3{font-size:1.3rem;margin-bottom:8px;font-weight:700}
+  .price-card .desc{color:var(--muted);font-size:0.9rem;margin-bottom:20px;min-height:40px}
+  .price{font-size:2.2rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:4px}
+  .price-period{color:var(--muted);font-size:0.85rem;margin-bottom:24px}
+  .features{list-style:none;margin-bottom:28px}
+  .features li{padding:8px 0;color:var(--text);font-size:0.92rem;display:flex;align-items:flex-start;gap:10px}
+  .check{color:var(--accent-2);flex-shrink:0;margin-top:3px}
+  .price-card .btn{width:100%;justify-content:center}
+  /* Process */
+  .process{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;counter-reset:step}
+  .step{padding:28px;background:var(--card);border:1px solid var(--border);border-radius:18px;position:relative;counter-increment:step}
+  .step::before{
+    content:"0" counter(step);
+    font-family:'JetBrains Mono',monospace;font-size:2.2rem;font-weight:700;
+    background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent;
+    display:block;margin-bottom:12px;letter-spacing:-0.02em;
+  }
+  .step h3{font-size:1.1rem;margin-bottom:8px;font-weight:700}
+  .step p{color:var(--muted);font-size:0.92rem}
+  /* Contact */
+  .contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  @media(max-width:840px){.contact-wrap{grid-template-columns:1fr}}
+  .contact-info h2{margin-bottom:20px}
+  .contact-info p{color:var(--muted);margin-bottom:28px;font-size:1.05rem}
+  .contact-links{list-style:none}
+  .contact-links li{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)}
+  .contact-links li:last-child{border:none}
+  .contact-icon{width:40px;height:40px;border-radius:10px;background:rgba(124,92,255,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .contact-links a{color:var(--text);text-decoration:none;font-weight:500}
+  .contact-links small{display:block;color:var(--muted);font-size:0.82rem;margin-top:2px}
+  form{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px}
+  .field{margin-bottom:18px}
+  label{display:block;font-size:0.85rem;color:var(--muted);margin-bottom:8px;font-weight:500}
+  input,textarea{
+    width:100%;padding:13px 16px;background:rgba(0,0,0,0.3);
+    border:1px solid var(--border);border-radius:12px;color:var(--text);
+    font-family:inherit;font-size:0.95rem;transition:border-color .2s,background .2s;
+  }
+  input:focus,textarea:focus{outline:none;border-color:var(--accent);background:rgba(0,0,0,0.5)}
+  textarea{resize:vertical;min-height:110px}
+  form .btn{width:100%;justify-content:center;margin-top:8px}
+  .form-note{font-size:0.8rem;color:var(--muted);text-align:center;margin-top:14px}
+  /* Contact CTA */
+  .contact-cta{padding:36px;background:var(--card);border:1px solid var(--border);border-radius:20px;box-shadow:var(--shadow)}
+  .contact-cta h3{font-size:1.5rem;margin-bottom:10px}
+  .contact-cta .cta-sub{color:var(--muted);margin-bottom:24px}
+  .cta-buttons{display:flex;flex-direction:column;gap:14px}
+  .cta-btn{width:100%;justify-content:flex-start;padding:18px 22px;border-radius:14px;gap:16px}
+  .cta-btn .cta-icon{font-size:1.6rem;line-height:1}
+  .cta-btn .cta-text{display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+  .cta-btn .cta-title{font-size:1rem;font-weight:700}
+  .cta-btn .cta-value{font-size:0.85rem;opacity:0.85;font-weight:500}
+  .btn-neon-yellow{
+    background:#f7ff00;
+    color:#0a0613;
+    border:1px solid #f7ff00;
+    box-shadow:0 0 12px rgba(247,255,0,0.7),0 0 30px rgba(247,255,0,0.45),0 0 60px rgba(247,255,0,0.25),inset 0 0 12px rgba(255,255,255,0.25);
+    text-shadow:0 0 6px rgba(247,255,0,0.45);
+    animation:neonYellowPulse 2.4s ease-in-out infinite;
+  }
+  .btn-neon-yellow:hover{
+    background:#fbff4a;
+    color:#0a0613;
+    transform:translateY(-2px);
+    box-shadow:0 0 18px rgba(247,255,0,0.9),0 0 45px rgba(247,255,0,0.6),0 0 90px rgba(247,255,0,0.35),inset 0 0 16px rgba(255,255,255,0.35);
+  }
+  .btn-neon-yellow .cta-value{opacity:0.8;color:#1a1a00}
+  @keyframes neonYellowPulse{
+    0%,100%{box-shadow:0 0 12px rgba(247,255,0,0.7),0 0 30px rgba(247,255,0,0.45),0 0 60px rgba(247,255,0,0.25),inset 0 0 12px rgba(255,255,255,0.25)}
+    50%{box-shadow:0 0 18px rgba(247,255,0,0.95),0 0 50px rgba(247,255,0,0.65),0 0 100px rgba(247,255,0,0.4),inset 0 0 18px rgba(255,255,255,0.4)}
+  }
+  /* Footer */
+  footer{padding:48px 0 32px;border-top:1px solid var(--border);text-align:center}
+  footer p{color:var(--muted);font-size:0.88rem}
+  footer .heart{color:var(--accent-3)}
+  /* Reveal animation */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ===== Neon edges & decor ===== */
+  /* Fixed neon frame around viewport */
+  .neon-frame{position:fixed;inset:0;z-index:90;pointer-events:none}
+  .neon-frame .edge{position:absolute;opacity:0.95}
+  .neon-frame .edge-top{
+    top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,transparent 0%,#7c5cff 15%,#22d3ee 50%,#ff7ac6 85%,transparent 100%);
+    box-shadow:0 0 12px #7c5cff,0 0 24px rgba(124,92,255,0.6),0 0 42px rgba(34,211,238,0.35);
+    animation:neonPulse 4s ease-in-out infinite;
+  }
+  .neon-frame .edge-bottom{
+    bottom:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,transparent 0%,#ff7ac6 15%,#7c5cff 50%,#22d3ee 85%,transparent 100%);
+    box-shadow:0 0 12px #ff7ac6,0 0 24px rgba(255,122,198,0.55),0 0 42px rgba(124,92,255,0.35);
+    animation:neonPulse 4s ease-in-out infinite reverse;
+  }
+  .neon-frame .edge-left{
+    top:0;bottom:0;left:0;width:2px;
+    background:linear-gradient(180deg,transparent 0%,#22d3ee 15%,#ff7ac6 50%,#7c5cff 85%,transparent 100%);
+    box-shadow:0 0 12px #22d3ee,0 0 24px rgba(34,211,238,0.55),0 0 42px rgba(255,122,198,0.3);
+    animation:neonPulse 5s ease-in-out infinite;
+  }
+  .neon-frame .edge-right{
+    top:0;bottom:0;right:0;width:2px;
+    background:linear-gradient(180deg,transparent 0%,#7c5cff 15%,#ff7ac6 50%,#22d3ee 85%,transparent 100%);
+    box-shadow:0 0 12px #7c5cff,0 0 24px rgba(124,92,255,0.55),0 0 42px rgba(255,122,198,0.3);
+    animation:neonPulse 5s ease-in-out infinite reverse;
+  }
+  @keyframes neonPulse{
+    0%,100%{opacity:0.7;filter:brightness(1)}
+    50%{opacity:1;filter:brightness(1.4)}
+  }
+  /* Moving neon comet along edges */
+  .neon-frame .comet{position:absolute;border-radius:999px;filter:blur(1px)}
+  .neon-frame .comet-top{top:-2px;left:0;width:120px;height:6px;
+    background:linear-gradient(90deg,transparent,#22d3ee,#fff,transparent);
+    box-shadow:0 0 20px #22d3ee,0 0 40px #7c5cff;
+    animation:cometX 7s linear infinite;
+  }
+  .neon-frame .comet-bottom{bottom:-2px;right:0;width:120px;height:6px;
+    background:linear-gradient(90deg,transparent,#ff7ac6,#fff,transparent);
+    box-shadow:0 0 20px #ff7ac6,0 0 40px #7c5cff;
+    animation:cometXr 9s linear infinite;
+  }
+  .neon-frame .comet-left{left:-2px;bottom:0;width:6px;height:120px;
+    background:linear-gradient(180deg,transparent,#7c5cff,#fff,transparent);
+    box-shadow:0 0 20px #7c5cff,0 0 40px #22d3ee;
+    animation:cometYr 8s linear infinite;
+  }
+  .neon-frame .comet-right{right:-2px;top:0;width:6px;height:120px;
+    background:linear-gradient(180deg,transparent,#ff7ac6,#fff,transparent);
+    box-shadow:0 0 20px #ff7ac6,0 0 40px #22d3ee;
+    animation:cometY 10s linear infinite;
+  }
+  @keyframes cometX{0%{left:-150px}100%{left:100%}}
+  @keyframes cometXr{0%{right:-150px}100%{right:100%}}
+  @keyframes cometY{0%{top:-150px}100%{top:100%}}
+  @keyframes cometYr{0%{bottom:-150px}100%{bottom:100%}}
+
+  /* Corner brackets */
+  .corner{position:fixed;width:48px;height:48px;z-index:91;pointer-events:none}
+  .corner::before,.corner::after{content:"";position:absolute;background:var(--accent-2);box-shadow:0 0 10px #22d3ee,0 0 20px rgba(34,211,238,0.6)}
+  .corner-tl{top:14px;left:14px}
+  .corner-tl::before{top:0;left:0;width:24px;height:2px}
+  .corner-tl::after{top:0;left:0;width:2px;height:24px}
+  .corner-tr{top:14px;right:14px}
+  .corner-tr::before{top:0;right:0;width:24px;height:2px;background:var(--accent-3);box-shadow:0 0 10px #ff7ac6,0 0 20px rgba(255,122,198,0.6)}
+  .corner-tr::after{top:0;right:0;width:2px;height:24px;background:var(--accent-3);box-shadow:0 0 10px #ff7ac6,0 0 20px rgba(255,122,198,0.6)}
+  .corner-bl{bottom:14px;left:14px}
+  .corner-bl::before{bottom:0;left:0;width:24px;height:2px;background:var(--accent);box-shadow:0 0 10px #7c5cff,0 0 20px rgba(124,92,255,0.6)}
+  .corner-bl::after{bottom:0;left:0;width:2px;height:24px;background:var(--accent);box-shadow:0 0 10px #7c5cff,0 0 20px rgba(124,92,255,0.6)}
+  .corner-br{bottom:14px;right:14px}
+  .corner-br::before{bottom:0;right:0;width:24px;height:2px}
+  .corner-br::after{bottom:0;right:0;width:2px;height:24px}
+
+  /* Decorative floating shapes */
+  .deco{position:fixed;z-index:0;pointer-events:none;opacity:0.55}
+  .deco-ring{
+    width:140px;height:140px;border-radius:50%;
+    border:1px solid rgba(34,211,238,0.4);
+    box-shadow:0 0 30px rgba(34,211,238,0.15),inset 0 0 30px rgba(34,211,238,0.1);
+    top:12%;right:4%;
+    animation:spinSlow 30s linear infinite;
+  }
+  .deco-ring::before{
+    content:"";position:absolute;inset:-1px;border-radius:50%;
+    border:1px dashed rgba(124,92,255,0.35);
+    animation:spinSlow 18s linear infinite reverse;
+  }
+  .deco-tri{
+    top:55%;left:3%;width:0;height:0;
+    border-left:22px solid transparent;border-right:22px solid transparent;
+    border-bottom:38px solid rgba(255,122,198,0.12);
+    filter:drop-shadow(0 0 8px rgba(255,122,198,0.5));
+    animation:floaty 9s ease-in-out infinite;
+  }
+  .deco-square{
+    bottom:8%;right:7%;width:44px;height:44px;
+    border:1px solid rgba(124,92,255,0.5);
+    box-shadow:0 0 16px rgba(124,92,255,0.4),inset 0 0 12px rgba(124,92,255,0.15);
+    animation:floaty 11s ease-in-out infinite,spinSlow 22s linear infinite;
+  }
+  .deco-plus{
+    top:28%;left:6%;width:26px;height:26px;
+    color:#22d3ee;font-size:26px;line-height:26px;text-align:center;
+    text-shadow:0 0 10px #22d3ee,0 0 20px rgba(34,211,238,0.6);
+    animation:floaty 7s ease-in-out infinite;
+  }
+  .deco-dot{
+    position:fixed;width:6px;height:6px;border-radius:50%;z-index:0;pointer-events:none;
+    background:#fff;box-shadow:0 0 10px currentColor,0 0 20px currentColor;
+  }
+  .deco-dot.d1{top:22%;left:48%;color:#22d3ee;animation:twinkle 3s ease-in-out infinite}
+  .deco-dot.d2{top:70%;left:32%;color:#ff7ac6;animation:twinkle 4s ease-in-out infinite .8s}
+  .deco-dot.d3{top:40%;right:18%;color:#7c5cff;animation:twinkle 5s ease-in-out infinite 1.5s}
+  .deco-dot.d4{bottom:20%;left:52%;color:#22d3ee;animation:twinkle 3.5s ease-in-out infinite .4s}
+
+  @keyframes spinSlow{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  @keyframes floaty{
+    0%,100%{transform:translate(0,0) rotate(0)}
+    50%{transform:translate(12px,-18px) rotate(15deg)}
+  }
+  @keyframes twinkle{
+    0%,100%{opacity:0.3;transform:scale(0.8)}
+    50%{opacity:1;transform:scale(1.3)}
+  }
+
+  /* Scan line */
+  .scan-line{
+    position:fixed;top:0;left:0;right:0;height:2px;z-index:89;pointer-events:none;
+    background:linear-gradient(90deg,transparent,rgba(34,211,238,0.8),rgba(124,92,255,0.9),rgba(255,122,198,0.8),transparent);
+    box-shadow:0 0 15px rgba(34,211,238,0.6),0 0 30px rgba(124,92,255,0.4);
+    animation:scan 8s ease-in-out infinite;
+  }
+  @keyframes scan{
+    0%{top:0;opacity:0}
+    5%{opacity:0.8}
+    50%{opacity:0.8}
+    95%{opacity:0.8}
+    100%{top:100vh;opacity:0}
+  }
+
+  /* Keep header above neon frame */
+  header{z-index:100}
+
+  @media(max-width:720px){
+    .corner{width:36px;height:36px}
+    .corner::before,.corner-tr::before,.corner-bl::before,.corner-br::before{width:18px}
+    .corner::after,.corner-tr::after,.corner-bl::after,.corner-br::after{height:18px}
+    .deco-ring{width:90px;height:90px;top:8%;right:-20px}
+    .deco-square{width:30px;height:30px}
+  }
+</style>
+</head>
+<body>
+<!-- Neon frame around viewport -->
+<div class="neon-frame">
+  <div class="edge edge-top"></div>
+  <div class="edge edge-bottom"></div>
+  <div class="edge edge-left"></div>
+  <div class="edge edge-right"></div>
+  <div class="comet comet-top"></div>
+  <div class="comet comet-bottom"></div>
+  <div class="comet comet-left"></div>
+  <div class="comet comet-right"></div>
+</div>
+<!-- Corner brackets -->
+<div class="corner corner-tl"></div>
+<div class="corner corner-tr"></div>
+<div class="corner corner-bl"></div>
+<div class="corner corner-br"></div>
+<!-- Scan line -->
+<div class="scan-line"></div>
+<!-- Decorative floating shapes -->
+<div class="deco deco-ring"></div>
+<div class="deco deco-tri"></div>
+<div class="deco deco-square"></div>
+<div class="deco deco-plus">+</div>
+<div class="deco-dot d1"></div>
+<div class="deco-dot d2"></div>
+<div class="deco-dot d3"></div>
+<div class="deco-dot d4"></div>
+
+<div class="bg-lines">
+  <div class="line line-1"></div>
+  <div class="line line-2"></div>
+  <div class="line line-3"></div>
+  <div class="line line-4"></div>
+  <div class="line v line-5"></div>
+  <div class="line v line-6"></div>
+  <div class="line v line-7"></div>
+</div>
+<div class="bg-orbs">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<header id="header">
+  <div class="container nav">
+    <div class="logo"><span class="logo-dot"></span> Ярослав Міхєєв</div>
+    <ul class="nav-links">
+      <li><a href="#services">Послуги</a></li>
+      <li><a href="#work">Роботи</a></li>
+      <li><a href="#pricing">Ціни</a></li>
+      <li><a href="#process">Процес</a></li>
+      <li><a href="#contact">Контакти</a></li>
+    </ul>
+    <a href="#contact" class="btn btn-primary">Обговорити проєкт →</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="badge reveal"><span class="pulse"></span> Приймаю замовлення — 1 вільне місце у квітні</div>
+    <h1 class="reveal">Створюю сайти, <br/><span class="gradient-text">що продають</span> <br/>і тішать око.</h1>
+    <p class="lead reveal">Привіт! Мене звати Ярослав Міхєєв. Розробляю сучасні сайти під ключ — від ідеї та дизайну до запуску й аналітики. Кожен проєкт такий, як цей: швидкий, чистий, з характером.</p>
+    <div class="hero-cta reveal">
+      <a href="https://t.me/tr1ay" target="_blank" rel="noopener" class="btn btn-outline">Замовити сайт</a>
+    </div>
+    <div class="stats reveal">
+      <div><div class="stat-num" data-target="48">0</div><div class="stat-label">проєктів у портфоліо</div></div>
+      <div><div class="stat-num" data-target="96">0</div><div class="stat-label">% задоволених клієнтів</div></div>
+      <div><div class="stat-num" data-target="2" data-prefix="1–">0</div><div class="stat-label">днів — середній термін лендінгу</div></div>
+      <div><div class="stat-num" data-target="100">0</div><div class="stat-label">балів Lighthouse на проєктах</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Що я роблю</div>
+      <h2>Повний цикл — від макета до запуску</h2>
+      <p>Не просто «намалювати й здати». Беру на себе відповідальність за результат: швидкість, конверсії, зручність.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal"><div class="service-icon">⚡</div><h3>Лендінги</h3><p>Односторінкові сайти, що перетворюють відвідувачів на клієнтів. Чітка структура, A/B-тести, інтеграція з CRM.</p></div>
+      <div class="service-card reveal"><div class="service-icon">🏢</div><h3>Корпоративні сайти</h3><p>Багатосторінкові бізнес-сайти з адмін-панеллю, блогом, SEO-оптимізацією та формами зв'язку.</p></div>
+      <div class="service-card reveal"><div class="service-icon">🛒</div><h3>Інтернет-магазини</h3><p>Каталоги, кошики, платіжні системи, інтеграції зі службами доставки та бухгалтерією. Продажі без болю.</p></div>
+      <div class="service-card reveal"><div class="service-icon">🎨</div><h3>Редизайн</h3><p>Оновлю ваш старий сайт до сучасного рівня — дизайн, швидкість, мобільна версія, конверсії.</p></div>
+      <div class="service-card reveal"><div class="service-icon">🔧</div><h3>Підтримка</h3><p>Правки, нові розділи, оновлення контенту, бекапи. Ваш сайт залишається живим, а не старіє.</p></div>
+      <div class="service-card reveal"><div class="service-icon">📈</div><h3>SEO та аналітика</h3><p>Технічна оптимізація, налаштування Google Analytics 4, відстеження цілей і воронок.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Роботи</div>
+      <h2>Проєкти, якими я пишаюсь</h2>
+      <p>Невелика добірка останніх робіт — від стартапів до сталого бізнесу.</p>
+    </div>
+    <div class="portfolio-grid">
+      <div class="project reveal">
+        <div class="project-preview p1"><div class="mock-browser"><div class="mock-dots"><span></span><span></span><span></span></div><div class="mock-content"></div></div></div>
+        <div class="project-info"><h3>Студія йоги Prana</h3><p>Лендінг з онлайн-бронюванням і абонементами. +38% лідів у перший місяць.</p><div class="tags"><span class="tag">Лендінг</span><span class="tag">CRM</span><span class="tag">Анімація</span></div></div>
+      </div>
+      <div class="project reveal">
+        <div class="project-preview p2"><div class="mock-browser"><div class="mock-dots"><span></span><span></span><span></span></div><div class="mock-content"></div></div></div>
+        <div class="project-info"><h3>Beans Craft Coffee</h3><p>Магазин з підпискою на каву. Рекурентні платежі, особистий кабінет.</p><div class="tags"><span class="tag">E-commerce</span><span class="tag">Підписки</span></div></div>
+      </div>
+      <div class="project reveal">
+        <div class="project-preview p3"><div class="mock-browser"><div class="mock-dots"><span></span><span></span><span></span></div><div class="mock-content"></div></div></div>
+        <div class="project-info"><h3>Юридична фірма Grant&amp;Co</h3><p>Багатосторінковий сайт із блогом, кейсами та калькулятором послуг.</p><div class="tags"><span class="tag">Корпоративний</span><span class="tag">SEO</span><span class="tag">Блог</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Ціни</div>
+      <h2>Прозоро, без дрібного шрифту</h2>
+      <p>Ціна фіксується в договорі. Жодних сюрпризів по ходу роботи.</p>
+    </div>
+    <div class="tabs reveal">
+      <button class="tab active" data-tab="sites">Сайти</button>
+      <button class="tab" data-tab="support">Підтримка</button>
+    </div>
+    <div class="pricing-grid" id="plan-sites">
+      <div class="price-card reveal">
+        <h3>Start</h3>
+        <p class="desc">Швидкий лендінг для запуску вашої ідеї</p>
+        <div class="price">€30</div>
+        <div class="price-period">від 7 днів</div>
+        <ul class="features">
+          <li><span class="check">✓</span> Одна сторінка до 6 блоків</li>
+          <li><span class="check">✓</span> Адаптив під усі пристрої</li>
+          <li><span class="check">✓</span> Форма заявки + сповіщення в Telegram</li>
+          <li><span class="check">✓</span> Базове налаштування SEO</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost">Обрати</a>
+      </div>
+      <div class="price-card featured reveal">
+        <div class="featured-badge">ПОПУЛЯРНИЙ</div>
+        <h3>Business</h3>
+        <p class="desc">Продаючий сайт з індивідуальним дизайном</p>
+        <div class="price">€70</div>
+        <div class="price-period">від 14 днів</div>
+        <ul class="features">
+          <li><span class="check">✓</span> Індивідуальний дизайн-макет</li>
+          <li><span class="check">✓</span> До 10 блоків + мікроанімації</li>
+          <li><span class="check">✓</span> Інтеграція з CRM / amoCRM / Bitrix24</li>
+          <li><span class="check">✓</span> Google Analytics + цілі</li>
+          <li><span class="check">✓</span> 30 днів безкоштовної підтримки</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">Обрати</a>
+      </div>
+      <div class="price-card reveal">
+        <h3>Premium</h3>
+        <p class="desc">Повний проєкт під ключ</p>
+        <div class="price">€80</div>
+        <div class="price-period">від 21 дня</div>
+        <ul class="features">
+          <li><span class="check">✓</span> Багатосторінковий сайт або магазин</li>
+          <li><span class="check">✓</span> Адмін-панель для самостійного керування</li>
+          <li><span class="check">✓</span> Платіжні системи та інтеграції</li>
+          <li><span class="check">✓</span> SEO-аудит і рекомендації</li>
+          <li><span class="check">✓</span> 60 днів підтримки</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost">Обрати</a>
+      </div>
+    </div>
+    <div class="pricing-grid" id="plan-support" style="display:none">
+      <div class="price-card reveal">
+        <h3>Lite</h3><p class="desc">Для невеликих сайтів</p>
+        <div class="price">€50</div><div class="price-period">на місяць</div>
+        <ul class="features"><li><span class="check">✓</span> До 2 годин правок</li><li><span class="check">✓</span> Щотижневі бекапи</li><li><span class="check">✓</span> Моніторинг доступності</li></ul>
+        <a href="#contact" class="btn btn-ghost">Обрати</a>
+      </div>
+      <div class="price-card featured reveal">
+        <div class="featured-badge">НАЙВИГІДНІШЕ</div>
+        <h3>Standard</h3><p class="desc">Для активного бізнесу</p>
+        <div class="price">€120</div><div class="price-period">на місяць</div>
+        <ul class="features"><li><span class="check">✓</span> До 6 годин правок</li><li><span class="check">✓</span> Щоденні бекапи</li><li><span class="check">✓</span> Оновлення CMS та плагінів</li><li><span class="check">✓</span> Відповідь протягом дня</li></ul>
+        <a href="#contact" class="btn btn-primary">Обрати</a>
+      </div>
+      <div class="price-card reveal">
+        <h3>Unlimited</h3><p class="desc">Усе включено</p>
+        <div class="price">€250</div><div class="price-period">на місяць</div>
+        <ul class="features"><li><span class="check">✓</span> Необмежені дрібні правки</li><li><span class="check">✓</span> Розробка нових розділів</li><li><span class="check">✓</span> Персональний менеджер</li><li><span class="check">✓</span> Відповідь протягом години</li></ul>
+        <a href="#contact" class="btn btn-ghost">Обрати</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Як ми працюємо</div>
+      <h2>Простий і прогнозований процес</h2>
+      <p>Ви завжди знаєте, на якому ми етапі й що буде далі.</p>
+    </div>
+    <div class="process">
+      <div class="step reveal"><h3>Бриф</h3><p>Скликаємося на дзвінок, обговорюємо задачу, цілі, референси. Фіксуємо терміни й бюджет.</p></div>
+      <div class="step reveal"><h3>Дизайн</h3><p>Роблю прототип і макет у Figma. Узгоджуємо кожну деталь.</p></div>
+      <div class="step reveal"><h3>Розробка</h3><p>Верстка, анімації, інтеграції. Щодня показую прогрес на тестовому домені.</p></div>
+      <div class="step reveal"><h3>Запуск</h3><p>Переносимо на ваш домен, налаштовуємо аналітику, передаємо доступи. Готово!</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-wrap">
+      <div class="contact-info reveal">
+        <div class="section-eyebrow">Зв'язатися</div>
+        <h2>Розкажіть про свій проєкт</h2>
+        <p>Відповідаю протягом години в робочий час. Перша консультація — безкоштовна. Допоможу, навіть якщо ви ще не визначилися, чи потрібен вам сайт.</p>
+        <ul class="contact-links">
+          <li><div class="contact-icon">✉️</div><div><a href="mailto:yaroslav.mikheev@icloud.com">yaroslav.mikheev@icloud.com</a><small>Для ділових звернень</small></div></li>
+          <li><div class="contact-icon">💬</div><div><a href="https://t.me/tr1ay" target="_blank">@tr1ay</a><small>Telegram — найшвидший спосіб</small></div></li>
+          <li><div class="contact-icon">📞</div><div><a href="tel:+380950972837">+380 95 097 28 37</a><small>Пн–Пт, 10:00–20:00</small></div></li>
+        </ul>
+      </div>
+      <div class="contact-cta reveal">
+        <h3>Напишіть мені прямо зараз</h3>
+        <p class="cta-sub">Оберіть зручний для вас спосіб — відповім якнайшвидше.</p>
+        <div class="cta-buttons">
+          <a class="btn btn-primary cta-btn" href="mailto:yaroslav.mikheev@icloud.com?subject=Запит%20щодо%20сайту&body=Вітаю!%20Мене%20цікавить..." onclick="openEmail(event)">
+            <span class="cta-icon" style="pointer-events:none">✉️</span>
+            <span class="cta-text" style="pointer-events:none">
+              <span class="cta-title">Написати на Email</span>
+              <span class="cta-value">yaroslav.mikheev@icloud.com</span>
+            </span>
+          </a>
+          <a class="btn btn-neon-yellow cta-btn" href="https://t.me/tr1ay" target="_blank" rel="noopener">
+            <span class="cta-icon">💬</span>
+            <span class="cta-text">
+              <span class="cta-title">Написати в Telegram</span>
+              <span class="cta-value">@tr1ay</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>© 2026 Ярослав Міхєєв. Зроблено з <span class="heart">♥</span> власноруч.</p>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('in')),{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Animated counters
+  const animate=(el,target,prefix)=>{
+    let v=0;const step=target/60;const id=setInterval(()=>{
+      v+=step;if(v>=target){v=target;clearInterval(id);el.textContent=(prefix||'')+Math.floor(v);return}
+      el.textContent=(prefix||'')+Math.floor(v);
+    },20);
+  };
+  const statIO=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){const t=+e.target.dataset.target;const p=e.target.dataset.prefix;animate(e.target,t,p);statIO.unobserve(e.target)}
+  }),{threshold:0.5});
+  document.querySelectorAll('[data-target]').forEach(el=>statIO.observe(el));
+
+  // Service card spotlight
+  document.querySelectorAll('.service-card').forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+      const r=card.getBoundingClientRect();
+      card.style.setProperty('--x',(e.clientX-r.left)+'px');
+      card.style.setProperty('--y',(e.clientY-r.top)+'px');
+    });
+  });
+
+  // Pricing tabs
+  document.querySelectorAll('.tab').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const t=btn.dataset.tab;
+      document.getElementById('plan-sites').style.display=t==='sites'?'grid':'none';
+      document.getElementById('plan-support').style.display=t==='support'?'grid':'none';
+    });
+  });
+
+  // Form
+  function submitForm(e){
+    e.preventDefault();
+    const btn=e.target.querySelector('button');
+    btn.textContent='Надсилаю...';btn.disabled=true;
+    setTimeout(()=>{
+      btn.textContent='✓ Заявку надіслано!';
+      e.target.reset();
+      setTimeout(()=>{btn.textContent='Надіслати заявку →';btn.disabled=false},2500);
+    },800);
+    return false;
+  }
+
+  // Email button — open mail client with Gmail fallback
+  function openEmail(e){
+    e.preventDefault();
+    const email='yaroslav.mikheev@icloud.com';
+    const subject=encodeURIComponent('Запит щодо сайту');
+    const body=encodeURIComponent('Вітаю! Мене цікавить...');
+    const mailto='mailto:'+email+'?subject='+subject+'&body='+body;
+    const gmail='https://mail.google.com/mail/?view=cm&fs=1&to='+email+'&su='+subject+'&body='+body;
+    // Try native mail client first
+    const start=Date.now();
+    const win=window.location.href;
+    window.location.href=mailto;
+    // Fallback to Gmail if nothing happened (no mail client configured)
+    setTimeout(()=>{
+      if(Date.now()-start<1500 && document.hasFocus()){
+        window.open(gmail,'_blank','noopener');
+      }
+    },600);
+  }
+
+  // Header shadow on scroll
+  window.addEventListener('scroll',()=>{
+    const h=document.getElementById('header');
+    h.style.boxShadow=window.scrollY>20?'0 10px 40px rgba(0,0,0,0.4)':'none';
+  });
+</script>
+</body>
+</html>
