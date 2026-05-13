@@ -288,24 +288,21 @@
   .cta-btn .cta-title{font-size:1rem;font-weight:700}
   .cta-btn .cta-value{font-size:0.85rem;opacity:0.85;font-weight:500}
   .btn-neon-yellow{
-    background:#f7ff00;
-    color:#0a0613;
-    border:1px solid #f7ff00;
-    box-shadow:0 0 12px rgba(247,255,0,0.7),0 0 30px rgba(247,255,0,0.45),0 0 60px rgba(247,255,0,0.25),inset 0 0 12px rgba(255,255,255,0.25);
-    text-shadow:0 0 6px rgba(247,255,0,0.45);
-    animation:neonYellowPulse 2.4s ease-in-out infinite;
+    background:#e8d97a;
+    color:#1a1500;
+    border:1px solid rgba(232,217,122,0.6);
+    box-shadow:0 8px 24px rgba(232,217,122,0.18);
+    text-shadow:none;
   }
   .btn-neon-yellow:hover{
-    background:#fbff4a;
-    color:#0a0613;
+    background:#efe28d;
+    color:#1a1500;
     transform:translateY(-2px);
-    box-shadow:0 0 18px rgba(247,255,0,0.9),0 0 45px rgba(247,255,0,0.6),0 0 90px rgba(247,255,0,0.35),inset 0 0 16px rgba(255,255,255,0.35);
+    box-shadow:0 12px 32px rgba(232,217,122,0.28);
   }
-  .btn-neon-yellow .cta-value{opacity:0.8;color:#1a1a00}
-  @keyframes neonYellowPulse{
-    0%,100%{box-shadow:0 0 12px rgba(247,255,0,0.7),0 0 30px rgba(247,255,0,0.45),0 0 60px rgba(247,255,0,0.25),inset 0 0 12px rgba(255,255,255,0.25)}
-    50%{box-shadow:0 0 18px rgba(247,255,0,0.95),0 0 50px rgba(247,255,0,0.65),0 0 100px rgba(247,255,0,0.4),inset 0 0 18px rgba(255,255,255,0.4)}
-  }
+  .btn-neon-yellow .cta-value{opacity:0.75;color:#3a2f00}
+  /* Override the global black text outline only on this button so text stays readable */
+  .btn-neon-yellow, .btn-neon-yellow *{text-shadow:none}
   /* Footer */
   footer{padding:48px 0 32px;border-top:1px solid var(--border);text-align:center}
   footer p{color:var(--muted);font-size:0.88rem}
@@ -517,7 +514,6 @@
     <div class="logo"><span class="logo-dot"></span> Ярослав Міхєєв</div>
     <ul class="nav-links">
       <li><a href="#services">Послуги</a></li>
-      <li><a href="#work">Роботи</a></li>
       <li><a href="#pricing">Ціни</a></li>
       <li><a href="#process">Процес</a></li>
       <li><a href="#contact">Контакти</a></li>
@@ -561,30 +557,6 @@
   </div>
 </section>
 
-<section id="work">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-eyebrow">Роботи</div>
-      <h2>Проєкти, якими я пишаюсь</h2>
-      <p>Невелика добірка останніх робіт — від стартапів до сталого бізнесу.</p>
-    </div>
-    <div class="portfolio-grid">
-      <div class="project reveal">
-        <div class="project-preview p1"><div class="mock-browser"><div class="mock-dots"><span></span><span></span><span></span></div><div class="mock-content"></div></div></div>
-        <div class="project-info"><h3>Студія йоги Prana</h3><p>Лендінг з онлайн-бронюванням і абонементами. +38% лідів у перший місяць.</p><div class="tags"><span class="tag">Лендінг</span><span class="tag">CRM</span><span class="tag">Анімація</span></div></div>
-      </div>
-      <div class="project reveal">
-        <div class="project-preview p2"><div class="mock-browser"><div class="mock-dots"><span></span><span></span><span></span></div><div class="mock-content"></div></div></div>
-        <div class="project-info"><h3>Beans Craft Coffee</h3><p>Магазин з підпискою на каву. Рекурентні платежі, особистий кабінет.</p><div class="tags"><span class="tag">E-commerce</span><span class="tag">Підписки</span></div></div>
-      </div>
-      <div class="project reveal">
-        <div class="project-preview p3"><div class="mock-browser"><div class="mock-dots"><span></span><span></span><span></span></div><div class="mock-content"></div></div></div>
-        <div class="project-info"><h3>Юридична фірма Grant&amp;Co</h3><p>Багатосторінковий сайт із блогом, кейсами та калькулятором послуг.</p><div class="tags"><span class="tag">Корпоративний</span><span class="tag">SEO</span><span class="tag">Блог</span></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="pricing">
   <div class="container">
     <div class="section-header reveal">
@@ -600,7 +572,7 @@
       <div class="price-card reveal">
         <h3>Start</h3>
         <p class="desc">Швидкий лендінг для запуску вашої ідеї</p>
-        <div class="price">€30</div>
+        <div class="price">€10</div>
         <div class="price-period">від 7 днів</div>
         <ul class="features">
           <li><span class="check">✓</span> Одна сторінка до 6 блоків</li>
@@ -614,7 +586,7 @@
         <div class="featured-badge">ПОПУЛЯРНИЙ</div>
         <h3>Business</h3>
         <p class="desc">Продаючий сайт з індивідуальним дизайном</p>
-        <div class="price">€70</div>
+        <div class="price">€30</div>
         <div class="price-period">від 14 днів</div>
         <ul class="features">
           <li><span class="check">✓</span> Індивідуальний дизайн-макет</li>
@@ -628,7 +600,7 @@
       <div class="price-card reveal">
         <h3>Premium</h3>
         <p class="desc">Повний проєкт під ключ</p>
-        <div class="price">€80</div>
+        <div class="price">€40</div>
         <div class="price-period">від 21 дня</div>
         <ul class="features">
           <li><span class="check">✓</span> Багатосторінковий сайт або магазин</li>
